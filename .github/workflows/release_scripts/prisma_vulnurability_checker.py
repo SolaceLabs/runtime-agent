@@ -68,6 +68,7 @@ def find_all_high_critical_vulnerabilities_to_resolve(excluded_libraries):
             current_vulnerability_description = vulnerability['description']
             if package_full_name in excluded_libraries:
                 print(f"ⓘ Package {package_full_name} has vulnerabilities but is in exclusion list.")
+                print(f"vulnerability details: {vulnerability}")
             else:
                 if package_full_name not in vulnerabilities_to_resolve:
                     vulnerabilities_to_resolve[package_full_name] = [current_vulnerability_description]
