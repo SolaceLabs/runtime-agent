@@ -17,7 +17,7 @@ concurrency:
 
 jobs:
   Test_Build:
-    name: Run Tests and Deploy
+    name: Run Tests and Deploy2
     runs-on: ubuntu-latest
     environment: ${{ github.ref=='refs/heads/main' && 'build_main' || 'build_pr' }}
     timeout-minutes: 20
