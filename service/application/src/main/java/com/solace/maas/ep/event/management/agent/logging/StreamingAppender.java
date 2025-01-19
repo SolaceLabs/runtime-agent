@@ -28,7 +28,9 @@ public class StreamingAppender extends AppenderBase<ILoggingEvent> {
     protected void append(ILoggingEvent event) {
         if (!standalone) {
             if (StringUtils.isNotEmpty(event.getMDCPropertyMap().get(RouteConstants.SCAN_ID))) {
-                sendScanLogsAsync(event,
+                sendScanLogsAsync(
+                        event.getMDCPropertyMap().get(RouteConstants.ORG_ID),
+                        event,
                         event.getMDCPropertyMap().get(RouteConstants.SCAN_ID),
                         event.getMDCPropertyMap().get(RouteConstants.TRACE_ID),
                         event.getMDCPropertyMap().get(RouteConstants.ACTOR_ID),
@@ -36,7 +38,9 @@ public class StreamingAppender extends AppenderBase<ILoggingEvent> {
                         event.getMDCPropertyMap().get(RouteConstants.SCHEDULE_ID),
                         event.getMDCPropertyMap().get(RouteConstants.MESSAGING_SERVICE_ID));
             } else if (StringUtils.isNotEmpty(event.getMDCPropertyMap().get(RouteConstants.COMMAND_CORRELATION_ID))) {
-                sendCommandLogsAsync(event,
+                sendCommandLogsAsync(
+                        event.getMDCPropertyMap().get(RouteConstants.ORG_ID),
+                        event,
                         event.getMDCPropertyMap().get(RouteConstants.COMMAND_CORRELATION_ID),
                         event.getMDCPropertyMap().get(RouteConstants.TRACE_ID),
                         event.getMDCPropertyMap().get(RouteConstants.ACTOR_ID),
@@ -45,7 +49,8 @@ public class StreamingAppender extends AppenderBase<ILoggingEvent> {
         }
     }
 
-    private void sendCommandLogsAsync(ILoggingEvent event, String commandCorrelationId, String traceId,
+    private void sendCommandLogsAsync(String orgId,
+                                      ILoggingEvent event, String commandCorrelationId, String traceId,
                                       String actorId, String messagingServiceId) {
 
 
@@ -58,6 +63,7 @@ public class StreamingAppender extends AppenderBase<ILoggingEvent> {
             // Need to set headers to let the Route have access to the Correlation ID, Group ID, and Messaging Service ID.
             exchange.getIn().setHeader(RouteConstants.COMMAND_CORRELATION_ID, commandCorrelationId);
             exchange.getIn().setHeader(RouteConstants.TRACE_ID, traceId);
+            exchange.getIn().setHeader(RouteConstants.ORG_ID, orgId);
             exchange.getIn().setHeader(RouteConstants.ACTOR_ID, actorId);
             exchange.getIn().setHeader(RouteConstants.MESSAGING_SERVICE_ID, messagingServiceId);
 
@@ -71,7 +77,7 @@ public class StreamingAppender extends AppenderBase<ILoggingEvent> {
         });
     }
 
-    private void sendScanLogsAsync(ILoggingEvent event, String scanId, String traceId, String actorId,
+    private void sendScanLogsAsync(String orgId, ILoggingEvent event, String scanId, String traceId, String actorId,
                                    String scanType, String groupId, String messagingServiceId) {
         RouteEntity route = creatLoggingRoute(scanType, messagingServiceId);
 
@@ -81,6 +87,7 @@ public class StreamingAppender extends AppenderBase<ILoggingEvent> {
             exchange.getIn().setHeader(RouteConstants.TRACE_ID, traceId);
             exchange.getIn().setHeader(RouteConstants.ACTOR_ID, actorId);
             exchange.getIn().setHeader(RouteConstants.SCAN_TYPE, scanType);
+            exchange.getIn().setHeader(RouteConstants.ORG_ID, orgId);
             exchange.getIn().setHeader(RouteConstants.SCHEDULE_ID, groupId);
             exchange.getIn().setHeader(RouteConstants.MESSAGING_SERVICE_ID, messagingServiceId);
 

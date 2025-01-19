@@ -12,6 +12,7 @@ public class RouteConstants {
     public static final String TRACE_ID = "traceId";
 
     public static final String ACTOR_ID = "ACTOR_ID";
+    public static final String ORG_ID = "ORG_ID";
 
     public static final String SCAN_TYPE = "SCAN_TYPE";
 

@@ -42,6 +42,7 @@ public class EMAControllerTest {
 
         ScanRequestDTO scanRequestDTO = new ScanRequestDTO(List.of("topics"), List.of());
         ScanRequestBO scanRequestBO = new ScanRequestBO(
+                "orgId",
                 "id",
                 "scanConnected",
                 "traceId",
@@ -73,6 +74,7 @@ public class EMAControllerTest {
 
         ScanRequestDTO scanRequestDTO = new ScanRequestDTO(List.of("topics"), List.of("EVENT_PORTAL"));
         ScanRequestBO scanRequestBO = new ScanRequestBO(
+                "orgId",
                 "id",
                 "scanId",
                 "traceId",
@@ -103,6 +105,7 @@ public class EMAControllerTest {
 
         ScanRequestDTO scanRequestDTO = new ScanRequestDTO(List.of("topics"), List.of());
         ScanRequestBO scanRequestBO = new ScanRequestBO(
+                "orgId",
                 "id",
                 "scanId",
                 "traceId",

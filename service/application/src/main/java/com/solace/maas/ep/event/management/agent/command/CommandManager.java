@@ -91,7 +91,7 @@ public class CommandManager {
         Validate.notEmpty(request.getCommandBundles(), "CommandBundles must not be empty");
         Validate.notEmpty(request.getCommandBundles().get(0).getCommands(), "At least one command must be present");
         CommandRequest requestBO = commandMapper.map(request);
-        configPush(requestBO);
+        configPush(request.getOrgId(), requestBO);
     }
 
     /**
@@ -104,11 +104,11 @@ public class CommandManager {
     public void handleError(Exception e, CommandMessage message) {
         CommandRequest requestBO = commandMapper.map(message);
         attachErrorLogToCommand(false, e, requestBO);
-        finalizeAndSendResponse(requestBO);
+        finalizeAndSendResponse(message.getOrgId(), requestBO);
     }
 
     @SuppressWarnings("PMD")
-    private void configPush(CommandRequest request) {
+    private void configPush(String orgId, CommandRequest request) {
         List<Path> executionLogFilesToClean = new ArrayList<>();
         boolean attacheErrorToTerraformCommand = false;
         try {
@@ -155,7 +155,7 @@ public class CommandManager {
             attachErrorLogToCommand(attacheErrorToTerraformCommand, e, request);
         } finally {
             try {
-                finalizeAndSendResponse(request);
+                finalizeAndSendResponse(orgId, request);
                 // the response could also be an error log entry
                 // if we fail to send the response to EP, we can not do anything about it
                 // besides logging it
@@ -204,10 +204,10 @@ public class CommandManager {
         }
     }
 
-    private void finalizeAndSendResponse(CommandRequest request) {
+    private void finalizeAndSendResponse(String orgId, CommandRequest request) {
         request.determineStatus();
         Map<String, String> topicVars = Map.of(
-                "orgId", eventPortalProperties.getOrganizationId(),
+                "orgId", orgId,
                 "runtimeAgentId", eventPortalProperties.getRuntimeAgentId(),
                 COMMAND_CORRELATION_ID, request.getCommandCorrelationId()
         );
@@ -216,7 +216,7 @@ public class CommandManager {
                 request.getContext(),
                 request.getStatus(),
                 request.getCommandBundles());
-        response.setOrgId(eventPortalProperties.getOrganizationId());
+        response.setOrgId(orgId);
         response.setTraceId(MDC.get(TRACE_ID));
         response.setActorId(MDC.get(ACTOR_ID));
         commandPublisher.sendCommandResponse(response, topicVars);

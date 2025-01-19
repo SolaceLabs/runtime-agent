@@ -47,7 +47,7 @@ public class EmaCommandLine implements CommandLineRunner {
                         String messagingServiceId = args[1];
                         String filePathAndName = args[2];
 
-                        commandLineScan.runScan(messagingServiceId, filePathAndName);
+                        commandLineScan.runScan(eventPortalProperties.getOrganizationId(), messagingServiceId, filePathAndName);
                     } else {
                         checkArgsLength(args.length, expectedScanArgNum);
                     }

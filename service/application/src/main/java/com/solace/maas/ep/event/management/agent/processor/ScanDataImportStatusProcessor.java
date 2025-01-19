@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 @Slf4j
 @Component
 @ConditionalOnProperty(name = "event-portal.gateway.messaging.standalone", havingValue = "false")
-public class ScanDataImportStatusProcessor implements Processor {
+public class  ScanDataImportStatusProcessor implements Processor {
     @Override
     public void process(Exchange exchange) throws Exception {
         MetaInfFileDetailsBO fileName = (MetaInfFileDetailsBO) exchange.getIn().getBody();

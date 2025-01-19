@@ -16,6 +16,7 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+
 import static com.solace.maas.ep.common.metrics.ObservabilityConstants.MAAS_EMA_SCAN_EVENT_RECEIVED;
 import static com.solace.maas.ep.common.metrics.ObservabilityConstants.SCAN_ID_TAG;
 import static java.util.concurrent.TimeUnit.SECONDS;
@@ -76,6 +77,7 @@ public class ScanCommandMessageProcessor implements MessageProcessor<ScanCommand
                 .messagingServiceId(message.getMessagingServiceId())
                 .scanId(scanId)
                 .traceId(message.getTraceId())
+                .orgId(message.getOrgId())
                 .actorId(message.getActorId())
                 .scanTypes(entityTypes)
                 .destinations(scanRequestDestinations)
@@ -128,6 +130,6 @@ public class ScanCommandMessageProcessor implements MessageProcessor<ScanCommand
 
     @Override
     public void onFailure(Exception e, ScanCommandMessage message) {
-        scanManager.handleError(e, message);
+        scanManager.handleError(message.getOrgId(), message);
     }
 }

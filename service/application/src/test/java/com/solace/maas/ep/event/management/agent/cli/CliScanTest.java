@@ -65,7 +65,7 @@ public class CliScanTest {
 
     @Test
     public void testScanCLICommand() throws Exception {
-        when(scanService.singleScan(any(), any(), any(), any(), any(), any(MessagingServiceEntity.class), anyString())).thenReturn("xyz");
+        when(scanService.singleScan(anyString(), any(), any(), any(), any(), any(), any(MessagingServiceEntity.class), anyString())).thenReturn("xyz");
         when(scanService.findById(anyString())).thenReturn(Optional.of(ScanEntity.builder()
                 .id("abcdef")
                 .messagingService(MessagingServiceEntity.builder()

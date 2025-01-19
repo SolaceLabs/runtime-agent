@@ -27,7 +27,8 @@ public class CommandLineScan {
     private final ImportService importService;
     private final CommandLineCommon commandLineCommon;
 
-    public CommandLineScan(ScanManager scanManager, IDGenerator idGenerator,
+    public CommandLineScan(ScanManager scanManager,
+                           IDGenerator idGenerator,
                            MessagingServiceDelegateServiceImpl messagingServiceDelegateService,
                            ImportService importService,
                            CommandLineCommon commandLineCommon) {
@@ -38,12 +39,13 @@ public class CommandLineScan {
         this.commandLineCommon = commandLineCommon;
     }
 
-    public void runScan(String messagingServiceId, String filePathAndName) throws InterruptedException, IOException {
+    public void runScan(String orgId, String messagingServiceId, String filePathAndName) throws InterruptedException, IOException {
         MessagingServiceEntity messagingServiceEntity = messagingServiceDelegateService.getMessagingServiceById(messagingServiceId);
 
         ScanRequestBO scanRequestBO = ScanRequestBO.builder()
                 .messagingServiceId(messagingServiceId)
                 .scanId(idGenerator.generateRandomUniqueId())
+                .orgId(orgId)
                 .destinations(List.of("FILE_WRITER"))
                 .build();
         setScanType(messagingServiceEntity, scanRequestBO, messagingServiceId);

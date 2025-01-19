@@ -28,6 +28,7 @@ public class ScanRequestMapperTest {
         scanRequestMapper.map((ScanRequestDTO) null);
 
         ScanRequestBO scanRequestBO = new ScanRequestBO(
+                "orgId",
                 "id",
                 "scanId",
                 "traceId",
@@ -45,6 +46,7 @@ public class ScanRequestMapperTest {
     public void testMapperWithUser() {
         User user = new User("orgId", "userId");
         ScanRequestBO scanRequestBO = new ScanRequestBO(
+                "orgId",
                 "id",
                 "scanId",
                 "traceId",

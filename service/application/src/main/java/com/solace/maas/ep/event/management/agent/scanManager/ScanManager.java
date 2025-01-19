@@ -40,7 +40,6 @@ public class ScanManager {
     private final MessagingServiceDelegateServiceImpl messagingServiceDelegateService;
     private final ScanService scanService;
     private final String runtimeAgentId;
-    private final String orgId;
     // This is an optional dependency since it is not available in standalone mode.
     // If the bean is not present, the publisher will not be used.
     private final Optional<ScanStatusPublisher> scanStatusPublisherOpt;
@@ -54,7 +53,6 @@ public class ScanManager {
         this.scanService = scanService;
         this.scanStatusPublisherOpt = scanStatusPublisher;
         runtimeAgentId = eventPortalProperties.getRuntimeAgentId();
-        orgId = eventPortalProperties.getOrganizationId();
     }
 
     public String scan(ScanRequestBO scanRequestBO) {
@@ -68,6 +66,7 @@ public class ScanManager {
         MDC.put(RouteConstants.TRACE_ID, traceId);
         MDC.put(RouteConstants.ACTOR_ID, actorId);
         MDC.put(RouteConstants.SCHEDULE_ID, groupId);
+        MDC.put(RouteConstants.ORG_ID, scanRequestBO.getOrgId());
         MDC.put(RouteConstants.MESSAGING_SERVICE_ID, messagingServiceId);
 
         MessagingServiceEntity messagingServiceEntity = retrieveMessagingServiceEntity(messagingServiceId);
@@ -114,10 +113,10 @@ public class ScanManager {
                         .toList().stream()
                 ).toList().stream().flatMap(List::stream).toList();
 
-        return scanService.singleScan(routes, groupId, scanId, traceId, actorId, messagingServiceEntity, runtimeAgentId);
+        return scanService.singleScan(scanRequestBO.getOrgId(), routes, groupId, scanId, traceId, actorId, messagingServiceEntity, runtimeAgentId);
     }
 
-    public void handleError(Exception e, ScanCommandMessage message) {
+    public void handleError(String orgId, ScanCommandMessage message) {
 
         if (scanStatusPublisherOpt.isEmpty()) {
             return;
@@ -162,8 +161,8 @@ public class ScanManager {
 
     public boolean isScanComplete(String scanId) {
         if (ObjectUtils.isEmpty(scanId)) {
-           throw new IllegalArgumentException("Scan ID cannot be null or empty");
+            throw new IllegalArgumentException("Scan ID cannot be null or empty");
         }
-        return  scanService.isScanComplete(scanId);
+        return scanService.isScanComplete(scanId);
     }
 }

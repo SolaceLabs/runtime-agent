@@ -43,7 +43,6 @@ class ScanManagerHandleErrorTest {
         when(eventPortalProperties.getOrganizationId()).thenReturn("orgId");
         when(eventPortalProperties.getRuntimeAgentId()).thenReturn("runtimeAgentId");
 
-        RuntimeException mockEx = new RuntimeException("Mock Exception");
 
         ScanManager scanManagerUnderTest = new ScanManager(
                 messagingServiceDelegateService,
@@ -51,7 +50,7 @@ class ScanManagerHandleErrorTest {
                 eventPortalProperties,
                 Optional.of(scanStatusPublisher)
         );
-        scanManagerUnderTest.handleError(mockEx,createScanCommandMessage());
+        scanManagerUnderTest.handleError("orgId",createScanCommandMessage());
         verify(scanStatusPublisher, times(1)).sendOverallScanStatus(any(),any());
     }
 
@@ -59,8 +58,6 @@ class ScanManagerHandleErrorTest {
     void testScanManagerStandaloneHandleError(){
         when(eventPortalProperties.getOrganizationId()).thenReturn("orgId");
         when(eventPortalProperties.getRuntimeAgentId()).thenReturn("runtimeAgentId");
-
-        RuntimeException mockEx = new RuntimeException("Mock Exception");
 
         ScanManager scanManagerUnderTest = new ScanManager(
                 messagingServiceDelegateService,
@@ -70,7 +67,7 @@ class ScanManagerHandleErrorTest {
         );
         // should just do "nothing" and not throw an exception when scanStatusPublisher is not present
         assertDoesNotThrow(() ->
-            scanManagerUnderTest.handleError(mockEx, createScanCommandMessage()));
+            scanManagerUnderTest.handleError("orgId", createScanCommandMessage()));
 
     }
 

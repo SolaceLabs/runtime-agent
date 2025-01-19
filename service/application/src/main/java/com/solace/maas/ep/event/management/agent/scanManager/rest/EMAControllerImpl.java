@@ -50,7 +50,7 @@ public class EMAControllerImpl implements EMAController {
         ScanRequestBO scanRequestBO = scanRequestMapper.map(body);
         scanRequestBO.setMessagingServiceId(messagingServiceId);
         scanRequestBO.setScanId(idGenerator.generateRandomUniqueId());
-
+        scanRequestBO.setOrgId(eventPortalProperties.getOrganizationId());
         boolean isEMAStandalone = eventPortalProperties.getGateway().getMessaging().isStandalone();
         List<String> destinations = scanRequestBO.getDestinations();
 
