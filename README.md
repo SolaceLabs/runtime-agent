@@ -548,6 +548,7 @@ The Event Management Agent comes with the following event or message broker plug
 * Solace PubSub+
 * Confluent Schema Registry
 * MSK
+* IBM MQ
 
 The default application.yml provides various plugin examples. For Kafka, the properties section under credentials is passthrough. For example a property in ConsumerConfig or SSLConfigs classes.
 

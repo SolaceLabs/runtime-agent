@@ -1,0 +1,79 @@
+{
+  "subscription": [
+    {
+      "resolvedTopicString": "$SYS/MQ/INFO/QMGR/QM1/Monitor/CPU/SystemSummary",
+      "name": "",
+      "id": "414D5120514D312020202020202020203C434B6567270040"
+    },
+    {
+      "resolvedTopicString": "$SYS/MQ/INFO/QMGR/QM1/Monitor/CPU/QMgrSummary",
+      "name": "",
+      "id": "414D5120514D312020202020202020203C434B6569270040"
+    },
+    {
+      "resolvedTopicString": "$SYS/MQ/INFO/QMGR/QM1/Monitor/DISK/SystemSummary",
+      "name": "",
+      "id": "414D5120514D312020202020202020203C434B656B270040"
+    },
+    {
+      "resolvedTopicString": "$SYS/MQ/INFO/QMGR/QM1/Monitor/DISK/QMgrSummary",
+      "name": "",
+      "id": "414D5120514D312020202020202020203C434B656D270040"
+    },
+    {
+      "resolvedTopicString": "$SYS/MQ/INFO/QMGR/QM1/Monitor/DISK/Log",
+      "name": "",
+      "id": "414D5120514D312020202020202020203C434B656F270040"
+    },
+    {
+      "resolvedTopicString": "$SYS/MQ/INFO/QMGR/QM1/Monitor/STATMQI/PUBLISH",
+      "name": "",
+      "id": "414D5120514D312020202020202020203C434B6571270040"
+    },
+    {
+      "resolvedTopicString": "$SYS/MQ/INFO/QMGR/QM1/Monitor/STATMQI/CONNDISC",
+      "name": "",
+      "id": "414D5120514D312020202020202020203C434B6573270040"
+    },
+    {
+      "resolvedTopicString": "$SYS/MQ/INFO/QMGR/QM1/Monitor/STATMQI/OPENCLOSE",
+      "name": "",
+      "id": "414D5120514D312020202020202020203C434B6575270040"
+    },
+    {
+      "resolvedTopicString": "$SYS/MQ/INFO/QMGR/QM1/Monitor/STATMQI/INQSET",
+      "name": "",
+      "id": "414D5120514D312020202020202020203C434B6577270040"
+    },
+    {
+      "resolvedTopicString": "$SYS/MQ/INFO/QMGR/QM1/Monitor/STATMQI/PUT",
+      "name": "",
+      "id": "414D5120514D312020202020202020203C434B6579270040"
+    },
+    {
+      "resolvedTopicString": "$SYS/MQ/INFO/QMGR/QM1/Monitor/STATMQI/GET",
+      "name": "",
+      "id": "414D5120514D312020202020202020203C434B657B270040"
+    },
+    {
+      "resolvedTopicString": "$SYS/MQ/INFO/QMGR/QM1/Monitor/STATMQI/SYNCPOINT",
+      "name": "",
+      "id": "414D5120514D312020202020202020203C434B657D270040"
+    },
+    {
+      "resolvedTopicString": "$SYS/MQ/INFO/QMGR/QM1/Monitor/STATMQI/SUBSCRIBE",
+      "name": "",
+      "id": "414D5120514D312020202020202020203C434B657F270040"
+    },
+    {
+      "resolvedTopicString": "",
+      "name": "SYSTEM.DEFAULT.SUB",
+      "id": "414D5120514D312020202020202020207964416503010040"
+    },
+    {
+      "resolvedTopicString": "SYSTEM.BROKER.ADMIN.STREAM/MQ/QM1                                             /StreamSupport",
+      "name": "QM1 SYSTEM.BROKER.INTER.BROKER.COMMUNICATIONS 414D51590101000000000000000000000000000000000000 SYSTEM.BROKER.ADMIN.STREAM MQ/QM1                                             /StreamSupport",
+      "id": "414D5120514D31202020202020202020B2644165061D0040"
+    }
+  ]
+}

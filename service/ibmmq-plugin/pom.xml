@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.solace.maas.plugin.ibmmq</groupId>
+    <artifactId>ibmmq-plugin</artifactId>
+    <version>1.6.6-SNAPSHOT</version>
+    <name>Solace Event Management Agent - IBM MQ Plugin</name>
+    <description>Solace Event Management Agent - IBM MQ Plugin</description>
+
+    <properties>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <solace.maas.ema.version>1.6.6-SNAPSHOT</solace.maas.ema.version>
+        <spring.boot.version>3.1.11</spring.boot.version>
+        <!--
+                <spring.cloud.openfeign.version>4.0.6</spring.cloud.openfeign.version>
+                <openfeign.jackson.version>13.0</openfeign.jackson.version>
+        -->
+        <okhttp.version>4.0.1</okhttp.version>
+        <camel.version>4.2.0</camel.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <dependencies>
+        <!--  <dependency>
+              <groupId>org.springframework.boot</groupId>
+              <artifactId>spring-boot-starter</artifactId>
+              <version>${spring.boot.version}</version>
+          </dependency>-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-webflux</artifactId>
+            <version>${spring.boot.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>ch.qos.logback</groupId>
+                    <artifactId>logback-classic</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <!-- <dependency>
+             <groupId>org.springframework.cloud</groupId>
+             <artifactId>spring-cloud-starter-openfeign</artifactId>
+             <version>${spring.cloud.openfeign.version}</version>
+         </dependency>
+         <dependency>
+             <groupId>io.github.openfeign</groupId>
+             <artifactId>feign-jackson</artifactId>
+             <version>${openfeign.jackson.version}</version>
+         </dependency>-->
+        <dependency>
+            <groupId>com.solace.maas</groupId>
+            <artifactId>plugin</artifactId>
+            <version>${solace.maas.ema.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-jackson</artifactId>
+            <version>${camel.version}</version>
+        </dependency>
+
+        <!-- TESTING -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <version>${spring.boot.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.squareup.okhttp3</groupId>
+            <artifactId>okhttp</artifactId>
+            <version>${okhttp.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.squareup.okhttp3</groupId>
+            <artifactId>mockwebserver</artifactId>
+            <version>${okhttp.version}</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>${spring.boot.version}</version>
+            </plugin>
+        </plugins>
+    </build>
+</project>

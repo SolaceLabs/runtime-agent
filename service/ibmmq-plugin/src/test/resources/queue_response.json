@@ -1,0 +1,42 @@
+{
+  "queue": [
+    {
+      "name": "SYSTEM.ADMIN.STATISTICS.QUEUE",
+      "type": "local"
+    },
+    {
+      "name": "SYSTEM.DEFAULT.INITIATION.QUEUE",
+      "type": "local"
+    },
+    {
+      "name": "SYSTEM.ADMIN.ACCOUNTING.QUEUE",
+      "type": "local"
+    },
+    {
+      "name": "SYSTEM.ADMIN.LOGGER.EVENT",
+      "type": "local"
+    },
+    {
+      "name": "SYSTEM.BROKER.CONTROL.QUEUE",
+      "type": "local"
+    },
+    {
+      "name": "SYSTEM.CLUSTER.TRANSMIT.MODEL.QUEUE",
+      "model": {
+        "type": "permanentDynamic"
+      },
+      "type": "model"
+    },
+    {
+      "name": "SYSTEM.ADMIN.TRACE.ROUTE.QUEUE",
+      "type": "local"
+    },
+    {
+      "name": "SYSTEM.MQEXPLORER.REPLY.MODEL",
+      "model": {
+        "type": "temporaryDynamic"
+      },
+      "type": "model"
+    }
+  ]
+}
